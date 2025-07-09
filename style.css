@@ -1,37 +1,83 @@
+:root {
+	font-size: 16px;
+}
 * {
-  font-family: "Radley", serif;
-  font-weight: 400;
-  font-style: normal;
-  background-color: rgb(248, 248, 248);
+	box-sizing: border-box;
+	margin: 0;
+	padding: 0;
+	color: #000;
+	text-decoration: none;
+	font-family: "Cinzel", serif;
+	font-optical-sizing: auto;
+	font-style: normal;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
 }
-
-h1 {
-  text-align: center;
+body {
+	background-color: #fff;
+	text-align: center;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: 100vh;
 }
-
-.card {
-  display: flex;
-  gap: 1em;
-  justify-content: center;
+p,
+a {
+	color: inherit;
+	text-decoration: none;
 }
-
-#card2 > p,
-h3 {
-  margin-left: 0.5em;
+ul {
+	list-style: none;
 }
-
-#card3 > p,
-h3 {
-  margin-left: 0.5em;
+main {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	max-width: 800px;
+	width: 70%;
 }
-
-.card > #card2,
-#card3 {
-  flex-basis: 1em;
-  /* Neumorphism Border */
-  -webkit-border-radius: 10px;
-  border-radius: 10px;
-  background: #f8f8f8;
-  -webkit-box-shadow: 7px 7px 28px #d5d5d5, -7px -7px 28px #ffffff;
-  box-shadow: 7px 7px 28px #d5d5d5, -7px -7px 28px #ffffff;
+header {
+	width: 100%;
+}
+#typed {
+	font-weight: 600;
+	font-size: clamp(1.5rem, 5vw, 3rem);
+}
+nav ul {
+	display: flex;
+	gap: 3rem;
+}
+nav a {
+	font-size: clamp(1rem, 2vw, 1.25rem);
+	font-weight: 500;
+	padding: 0.5rem 0;
+	position: relative;
+	transition: color 0.3s ease;
+}
+nav a::after {
+	content: "";
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	width: 100%;
+	height: 1px;
+	background-color: #000;
+	transform: scaleX(0);
+	transform-origin: bottom right;
+	transition: transform 0.3s ease-out;
+}
+nav a:hover,
+nav a:focus {
+	color: #000;
+	outline: none;
+}
+nav a:hover::after,
+nav a:focus::after {
+	transform: scaleX(1);
+	transform-origin: bottom left;
+}
+hr {
+	width: 100%;
+	border-top: 1px solid #000;
+	margin: 1.8rem 0;
 }
