@@ -1,0 +1,35 @@
+{%- set metaTitle -%}
+{%- if not title -%}{{ site.title }} - {{ site.description | safe }}
+{%- else -%}{{ title | safe }} | {{ site.title }}
+{%- endif -%}
+{%- endset -%}
+{%- set metaDesc -%}
+{%- if not description -%}{{ site.description | safe }}
+{%- else -%}{{ description | safe }}
+{%- endif -%}
+{%- endset -%}
+{%- set metaKeywords -%}
+{%- if tags -%}{%- for tag in tags -%}{{ tag }},{%- endfor -%}{%- endif -%}
+{%- if site.keywords -%}
+{%- for keyword in site.keywords -%}
+{{ keyword }}{%- if not loop.last %},{% endif -%}
+{%- endfor -%}
+{%- endif -%}
+{%- endset -%}
+<!DOCTYPE html>
+<html lang="id-ID">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{{ metaTitle }}</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400..900&family=Lora:ital,wght@0,400..700;1,400..700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{{ '/assets/css/main.css' | url }}">
+</head>
+<body class="flex flex-col items-center justify-center min-h-screen text-center">
+
+  {{ content | safe }}
+
+</body>
+</html>

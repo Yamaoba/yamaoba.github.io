@@ -1,0 +1,60 @@
+{%- set metaTitle -%}
+{%- if not title -%}{{ site.title }} - {{ site.description | safe }}
+{%- else -%}{{ title | safe }} | {{ site.title }}
+{%- endif -%}
+{%- endset -%}
+{%- set metaDesc -%}
+{%- if not description -%}{{ site.description | safe }}
+{%- else -%}{{ description | safe }}
+{%- endif -%}
+{%- endset -%}
+{%- set metaKeywords -%}
+{%- if tags -%}{%- for tag in tags -%}{{ tag }},{%- endfor -%}{%- endif -%}
+{%- if site.keywords -%}
+{%- for keyword in site.keywords -%}
+{{ keyword }}{%- if not loop.last %},{% endif -%}
+{%- endfor -%}
+{%- endif -%}
+{%- endset -%}
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{{ metaTitle }}</title>
+  <meta name="title" content="{{ metaTitle }}">
+  <meta name="description" content="{{ metaDesc }}">
+  <meta name="keywords" content="{{ metaKeywords }}">
+  <meta name="author" content="{{ author.name }}">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="{{ site.url | url }}{{ page.url }}">
+  <link rel="shortcut icon" type="image/png" href="{{ '/assets/img/favicon.webp' | url }}">
+  <link rel="apple-touch-icon" href="{{ '/assets/img/apple-touch-icon.webp' | url }}">
+  <link rel="dns-prefetch" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="dns-prefetch" href="https://fonts.gstatic.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Germania+One&family=Lora:ital,wght@0,400..700;1,400..700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{{ '/assets/css/main.css' | url }}">
+</head>
+
+<body class="flex flex-col min-h-screen">
+  {% include "partials/header.njk" %}
+
+  {# Spacing mt-32 untuk memberi ruang bagi header fixed kita #}
+  <main class="container mx-auto px-4 mt-40 flex-grow">
+  {% include "partials/hot-news.njk" %}
+    <article>
+      {{ content | safe }}
+    </article>
+  </main>
+
+
+  {% include "partials/footer.njk" %}
+  <script src="{{ '/assets/js/bundle.js' | url }}"></script>
+</body>
+
+</html>

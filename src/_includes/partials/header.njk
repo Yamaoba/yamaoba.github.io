@@ -1,0 +1,102 @@
+{# File: src/_includes/partials/header.njk (ACTIVE PAGE STYLING) #}
+<header id="header" class="bg-white w-full z-50 fixed top-0">
+  {# ... HEADER UTAMA tidak berubah ... #}
+  <div class="bg-black text-slate-300 text-xs py-2 px-6">
+    <div class="max-w-5xl mx-auto grid grid-cols-3 items-center">
+      <nav class="justify-self-start">
+        <ul class="flex items-center gap-4">
+          <li><a href="{{ '/about' | url }}" class="hover:text-white transition-colors">About</a></li>
+          <li><a href="#" class="hover:text-white transition-colors">Contact</a></li>
+          <li><a href="{{ '/portfolio' | url }}" class="hover:text-white transition-colors">Portfolio</a></li>
+        </ul>
+      </nav>
+      <div class="text-center">
+        <span id="live-date"></span>
+      </div>
+      <div class="text-right">
+        <span id="live-time"></span>
+      </div>
+    </div>
+  </div>
+
+  <div class="max-w-5xl mx-auto px-6 py-5">
+    <div class="grid grid-cols-3 items-center md:hidden">
+      <div id="menu-toggle" class="flex items-center justify-start text-slate-700 hover:text-red-700 cursor-pointer">
+        {% include "icons/menu.svg" %}
+      </div>
+      <div class="text-center">
+        <a href="{{ '/' | url }}"><span class="text-4xl text-black font-bold germania-one-regular ">{{ site.title }}</span></a>
+      </div>
+      <div></div>
+    </div>
+    <div class="hidden md:grid md:grid-cols-3 md:items-center">
+      <nav class="justify-self-start">
+        <ul class="flex items-center gap-4">
+          {% for social in socials %}
+          <li><a href="{{ social.url }}" title="{{ social.label }}" target="_blank" rel="noopener" class="text-slate-700 hover:text-red-700">{% include "icons/" + social.icon + ".svg" %}</a></li>
+          {% endfor %}
+        </ul>
+      </nav>
+      <div class="text-center">
+        <a class="flex items-center justify-center" href="{{ '/' | url }}"><span class="text-4xl text-black font-bold germania-one-regular hover:text-red-700">{{ site.title }}</span></a>
+      </div>
+      <form id="search" action="{{ '/search' | url }}" class="justify-self-end">
+        <input type="text" id="header-searchbox" name="q" placeholder="Search here ..." class="w-full sm:max-w-xs bg-slate-200 border rounded h-8 p-4 text-sm">
+      </form>
+    </div>
+  </div>
+  <div class="hidden md:block border-t-2 border-b-2 border-black py-2">
+    <div class="max-w-5xl mx-auto px-6">
+      <div class="grid grid-cols-3 items-center">
+        <div></div>
+        <nav class="text-center">
+          <ul class="flex items-center justify-evenly gap-8 font-serif">
+            {% for item in menu %}
+            <li><a href="{{ item.url | url }}" class="{{ 'bg-red-500 text-white rounded-md px-3 py-1' if item.url == page.url else 'hover:underline' }} transition-colors duration-200">{{ item.label }}</a></li>
+            {% endfor %}
+            {%- for tagName, count in collections.tagList -%}
+            {%- if loop.index <= 6 -%}
+            {% set tagUrl = '/tags/' | url %}{% set currentTagUrl = tagUrl + tagName %}
+            <li><a href="{{ currentTagUrl }}" class="{{ 'bg-red-500 text-white rounded-md px-3 py-1' if currentTagUrl == page.url else 'hover:underline' }} transition-colors duration-200">{{ tagName | capitalize }}</a></li>
+            {%- endif -%}
+            {%- endfor -%}
+          </ul>
+        </nav>
+        <div></div>
+      </div>
+    </div>
+  </div>
+  {# MOBILE HEADER#}
+
+  <nav id="menu" class="hidden md:hidden border-t border-slate-200 bg-white px-6 pb-4">
+    <ul class="flex flex-col items-start gap-1 w-full">
+      {# Loop dari menu.json (Home, About) #}
+      {% for item in menu %}
+      <li>
+        <a href="{{ item.url | url }}" class="block w-full py-2 font-medium text-slate-700 hover:text-red-500 text-base">{{ item.label }}</a>
+      </li>
+      {% endfor %}
+
+      {# ▼▼▼ INI BAGIAN COLLAPSIBLE CATEGORY ▼▼▼ #}
+      <li>
+        <button id="category-toggle" class="flex justify-between items-center w-full py-2 font-medium text-slate-700 hover:text-red-500 text-base">
+          <span>Category</span>
+          <svg id="category-chevron" class="w-4 h-4 transition-transform duration-300" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" /></svg>
+        </button>
+        <ul id="category-list" class="hidden pl-4 mt-1 border-l-2 border-slate-200">
+          {% for name, length in collections.tagList %}
+          <li>
+            <a href="{{ '/tags/' | url }}{{ name }}" class="block py-1.5 text-slate-600 hover:text-red-500">{{ name | capitalize }}</a>
+          </li>
+          {% endfor %}
+        </ul>
+      </li>
+      {# ▲▲▲ END COLLAPSIBLE CATEGORY ▲▲▲ #}
+    </ul>
+
+    <form id="search-mobile" action="{{ '/search' | url }}" class="mt-4 pt-4 border-t border-slate-200">
+      <label class="visually-hidden" for="mobile-searchbox">Search here ...</label>
+      <input type="text" id="mobile-searchbox" name="q" class="w-full bg-slate-200 border border-transparent rounded h-10 p-4 text-sm" placeholder="Search here...">
+    </form>
+  </nav>
+</header>

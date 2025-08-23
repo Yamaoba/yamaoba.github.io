@@ -1,0 +1,54 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.germania-one-regular {
+	font-family: "Germania One", system-ui;
+	font-weight: 400;
+	font-style: normal;
+}
+
+.cinzel {
+	font-family: "Cinzel", system-ui;
+	font-weight: 700;
+	font-style: normal;
+}
+
+@layer base {
+	body {
+		font-family:
+			Lora,
+			system-ui,
+			-apple-system,
+			BlinkMacSystemFont,
+			Georgia,
+			Garamond,
+			Times,
+			serif;
+	}
+}
+@layer utilities {
+	.visually-hidden {
+		@apply block absolute h-px w-px overflow-hidden whitespace-nowrap;
+		clip: rect(1px 1px 1px 1px);
+		clip: rect(1px, 1px, 1px, 1px);
+		clip-path: inset(1px);
+	}
+}
+@layer components {
+	.nav-link-animated {
+		/* Kelas untuk link itu sendiri */
+		@apply font-serif font-medium relative py-2;
+	}
+	.nav-link-animated::after {
+		/* State awal dari garis bawah (tersembunyi dan di kanan) */
+		content: "";
+		@apply absolute bottom-0 left-0 w-full h-[1px] bg-black
+           transition-transform duration-300 ease-out 
+           origin-bottom-right scale-x-0; /* <-- Menggunakan utility Tailwind */
+	}
+	.nav-link-animated:hover::after {
+		/* State saat di-hover (muncul penuh dan dari kiri) */
+		@apply origin-bottom-left scale-x-100; /* <-- Menggunakan utility Tailwind */
+	}
+}

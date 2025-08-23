@@ -1,0 +1,46 @@
+{# File: src/_includes/partials/hot-news.njk (FINAL RESPONSIVE) #}
+
+{% set newsItems = collections.hotNews %}
+
+{% if newsItems.length > 0 %}
+{#
+  1. Di mobile (default): `flex` dengan overflow.
+  Di desktop (`md:`): `grid` 4 kolom yang seimbang.
+#}
+<div class="flex md:grid md:grid-cols-4 items-stretch gap-6 py-4 border-b-2 border-black overflow-x-auto">
+
+  {# Judul 'Hot News' sekarang hanya muncul di desktop untuk menghemat ruang di mobile #}
+
+  {% for item in newsItems %}
+  {#
+          2. Di mobile: `w-72` (lebar tetap) untuk scrolling.
+          Di desktop (`md:`): `w-auto` (lebar otomatis sesuai grid).
+        #}
+  <a href="{{ item.url | url }}" class="flex items-center gap-4 group w-72 md:w-auto flex-shrink-0">
+
+    {% if item.data.thumb %}
+    <img src="{{ item.data.thumb | url }}" alt="{{ item.data.title }} thumbnail" class="w-16 h-16 object-cover rounded-md flex-shrink-0">
+    {% endif %}
+
+    <div class="flex flex-col justify-center">
+      <span class="bg-red-500 text-white text-xs font-bold px-2 py-1 rounded-sm uppercase self-start mb-1">
+        {{ item.data.tags[0] }}
+      </span>
+
+      <h4 class="font-bold text-sm leading-tight group-hover:underline">
+        {{ item.data.title }}
+      </h4>
+
+      <p class="text-xs text-slate-600 mt-1 text-justify">
+        {% if item.data.description %}
+        {{ item.data.description | truncate(60, true) }}
+        {% else %}
+        {{ item.templateContent | striptags | truncate(60, true) }}
+        {% endif %}
+      </p>
+    </div>
+  </a>
+  {% endfor %}
+
+</div>
+{% endif %}

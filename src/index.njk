@@ -1,0 +1,55 @@
+---
+layout: landing
+title: RakaMA – Developer and Writer
+permalink: /
+---
+
+<main class="flex flex-col items-center max-w-3xl w-11/12 md:w-8/12">
+  <header class="w-full">
+    {# Div ini untuk Typed.js, harus disembunyikan #}
+    <div id="typed-strings" class="hidden">
+      <p>
+        RAKA SITE
+      </p>
+      <p>
+        The place
+      </p>
+      <p>
+        Where <strong>Actions</strong>,
+      </p>
+      <p>
+        speaks......
+      </p>
+      <p>
+        the <strong>Loudest</strong>.
+      </p>
+    </div>
+    {# Target untuk Typed.js #}
+    <span id="typed" class="font-semibold text-3xl md:text-5xl lg:text-6xl cinzel"></span>
+
+    <hr class="w-full- border-black my-7 mx-auto" style="width: 80%" />
+</header>
+
+<nav>
+  <ul class="flex justify-center gap-12">
+    <li><a href="/blog/" class="nav-link-animated">Blog</a></li>
+    <li><a href="/portfolio/" class="nav-link-animated">Portfolio</a></li>
+    <li><a href="/about/" class="nav-link-animated">About</a></li>
+  </ul>
+</nav>
+</main>
+
+{# Script Typed.js diletakkan di sini #}
+<script src="https://unpkg.com/typed.js@2.1.0/dist/typed.umd.js"></script>
+<script>
+var typed = new Typed("#typed", {
+stringsElement: "#typed-strings",
+typeSpeed: 85,
+backSpeed: 85,
+startDelay: 850,
+backDelay: 850,
+loop: true,
+loopCount: Infinity,
+showCursor: false
+});
+</script>
